@@ -6,9 +6,9 @@
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<input type="hidden" class="form-control" id="user_id" name="user_id" value='${user.user_id}'/>
-<div class="container">
 
+<div class="container">
+    <input type="hidden" class="form-control" id="user_id" name="user_id" value='${user.user_id}'/>
 
     <div class="mb-3">
         <label for="first_name" class="form-label">First Name:</label>
@@ -44,11 +44,11 @@
 
                 <option value="Administrator" <jstl:if test="${user.user_type eq 'Administrator'}">selected</jstl:if>>Administrator</option>
 
-        </select>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" value='${user.password}' required/>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" value='${user.password}' required/>
     </div>
 
 </div>

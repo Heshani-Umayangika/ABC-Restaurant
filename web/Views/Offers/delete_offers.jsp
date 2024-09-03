@@ -8,6 +8,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<p>Deleting the record! <p class="text-danger"> Patient ID :  ${patientId} </p> This action will remove it permanently. Proceed with caution. </p>
+<p>Deleting the record! <p class="text-danger"> Offer ID :  ${offerId} </p> This action will remove it permanently. Proceed with caution. </p>
 
-<input type="hidden" class="form-control" id="patient_id" name="patient_id" value='${patientId}'/>
+<input type="hidden" class="form-control" id="offerId" name="offerId" value='${offerId}'/>

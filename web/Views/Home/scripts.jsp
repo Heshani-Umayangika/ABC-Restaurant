@@ -1,9 +1,3 @@
-<%-- 
-    Document   : scripts
-    Created on : Mar 17, 2024, 6:11:32 PM
-    Author     : Kelum
---%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -15,95 +9,7 @@
 
 
 <script>
-    // Appointments Section Start---------------------------------------------------
-    $(document).on('click', '#modal-add-appointments', function () {
-        var title = "Confirm Insertion", buttonText = "Save", buttonClass = "btn btn-primary", url = "Appointments?page=Add";
-        openModal(title, buttonText, buttonClass, url);
-
-        var actionURL = "Appointments", formMethod = "POST", actionType = "Insert";
-        changeForm(actionURL, formMethod, actionType);
-    });
-
-    $(document).on('click', '#modal-edit-appointments', function () {
-        var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Appointments?page=Edit&appointmentId=' + $(this).data('test-id');
-        openModal(title, buttonText, buttonClass, url);
-
-        var actionURL = "Appointments", formMethod = "POST", actionType = "Update";
-        changeForm(actionURL, formMethod, actionType);
-    });
-
-    $(document).on('click', '#modal-delete-appointments', function () {
-        var title = "Confirm Deletion", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'Appointments?page=Delete&appointmentId=' + $(this).data('test-id');
-        openModal(title, buttonText, buttonClass, url);
-
-        var actionURL = "Appointments", formMethod = "GET", actionType = "Delete";
-        changeForm(actionURL, formMethod, actionType);
-    });
-//Appointments Section End------------------------------------------------------
-
-// Payments Section Start-------------------------------------------------------
-    $(document).on('click', '#modal-edit-payments', function () {
-        var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Payments?page=Edit&paymentId=' + $(this).data('test-id');
-        openModal(title, buttonText, buttonClass, url);
-
-        var actionURL = "Payments", formMethod = "POST", actionType = "Update";
-        changeForm(actionURL, formMethod, actionType);
-    });
-// Payments Section End---------------------------------------------------------
-
-// Facility Section Start----------------------------------------------------------
-    $(document).on('click', '#modal-add-facility', function () {
-        var title = "Confirm Insertion", buttonText = "Save", buttonClass = "btn btn-primary", url = "Facilities?page=Add";
-        openModal(title, buttonText, buttonClass, url);
-
-        var actionURL = "Facilities", formMethod = "POST", actionType = "Insert";
-        changeForm(actionURL, formMethod, actionType);
-    });
-
-    $(document).on('click', '#modal-edit-facility', function () {
-        var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Facilities?page=Edit&facilityId=' + $(this).data('test-id');
-        openModal(title, buttonText, buttonClass,url );
-        
-        var actionURL = "Facilities", formMethod = "POST", actionType = "Update";
-        changeForm(actionURL, formMethod, actionType);
-    });
-
-    $(document).on('click', '#modal-delete-facility', function () {
-        var title = "Confirm Deletion", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'Facilities?page=Delete&facilityId=' + $(this).data('test-id');
-        openModal(title, buttonText, buttonClass, url);
-
-        var actionURL = "Facilities", formMethod = "GET", actionType = "Delete";
-        changeForm(actionURL, formMethod, actionType);
-    });
-// Facility Section End------------------------------------------------------------
-
-// Patients Section Start-------------------------------------------------------
-    $(document).on('click', '#modal-add-patients', function () {
-        var title = "Confirm Registration", buttonText = "Save", buttonClass = "btn btn-primary", url = "Patients?page=Add";
-        openModal(title, buttonText, buttonClass, url);
-
-        var actionURL = "Patients", formMethod = "POST", actionType = "Insert";
-        changeForm(actionURL, formMethod, actionType);
-    });
-
-    $(document).on('click', '#modal-edit-patients', function () {
-        var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Patients?page=Edit&patientId=' + $(this).data('test-id');
-        openModal(title, buttonText, buttonClass, url);
-
-        var actionURL = "Patients", formMethod = "POST", actionType = "Update";
-        changeForm(actionURL, formMethod, actionType);
-    });
-
-    $(document).on('click', '#modal-delete-patients', function () {
-        var title = "Confirm Deletion", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'Patients?page=Delete&patientId=' + $(this).data('test-id');
-        openModal(title, buttonText, buttonClass, url);
-
-        var actionURL = "Patients", formMethod = "GET", actionType = "Delete";
-        changeForm(actionURL, formMethod, actionType);
-    });
-// Patients Section End--------------------------------------------------------- 
-
-// Users Section Start----------------------------------------------------------
+    // Users Section Start----------------------------------------------------------
     $(document).on('click', '#modal-add-users', function () {
         var title = "Confirm Registration", buttonText = "Save", buttonClass = "btn btn-primary", url = "Users?page=Add";
         openModal(title, buttonText, buttonClass, url);
@@ -127,7 +33,104 @@
         var actionURL = "Users", formMethod = "GET", actionType = "Delete";
         changeForm(actionURL, formMethod, actionType);
     });
-// Users Section End------------------------------------------------------------
+    // Users Section End------------------------------------------------------------
+//
+//
+//
+    // Facility Section Start----------------------------------------------------------
+    $(document).on('click', '#modal-add-facility', function () {
+        var title = "Confirm Insertion", buttonText = "Save", buttonClass = "btn btn-primary", url = "Facilities?page=Add";
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Facilities", formMethod = "POST", actionType = "Insert";
+        changeForm(actionURL, formMethod, actionType);
+    });
+
+    $(document).on('click', '#modal-edit-facility', function () {
+        var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Facilities?page=Edit&facilityId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Facilities", formMethod = "POST", actionType = "Update";
+        changeForm(actionURL, formMethod, actionType);
+    });
+
+    $(document).on('click', '#modal-delete-facility', function () {
+        var title = "Confirm Deletion", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'Facilities?page=Delete&facilityId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Facilities", formMethod = "GET", actionType = "Delete";
+        changeForm(actionURL, formMethod, actionType);
+    });
+    // Facility Section End------------------------------------------------------------
+//
+//
+//
+    // Services Section Start---------------------------------------------------
+    $(document).on('click', '#modal-add-services', function () {
+        var title = "Confirm Insertion", buttonText = "Save", buttonClass = "btn btn-primary", url = "Services?page=Add";
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Services", formMethod = "POST", actionType = "Insert";
+        changeForm(actionURL, formMethod, actionType);
+    });
+
+    $(document).on('click', '#modal-edit-services', function () {
+        var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Services?page=Edit&serviceId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Services", formMethod = "POST", actionType = "Update";
+        changeForm(actionURL, formMethod, actionType);
+    });
+
+    $(document).on('click', '#modal-delete-services', function () {
+        var title = "Confirm Deletion", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'Services?page=Delete&serviceId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Services", formMethod = "GET", actionType = "Delete";
+        changeForm(actionURL, formMethod, actionType);
+    });
+    //Services Section End------------------------------------------------------
+//
+//
+//
+    // Offers Section Start-------------------------------------------------------
+    $(document).on('click', '#modal-add-offers', function () {
+        var title = "Confirm Registration", buttonText = "Save", buttonClass = "btn btn-primary", url = "Offers?page=Add";
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Offers", formMethod = "POST", actionType = "Insert";
+        changeForm(actionURL, formMethod, actionType);
+    });
+
+    $(document).on('click', '#modal-edit-offers', function () {
+        var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Offers?page=Edit&offerId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Offers", formMethod = "POST", actionType = "Update";
+        changeForm(actionURL, formMethod, actionType);
+    });
+
+    $(document).on('click', '#modal-delete-offers', function () {
+        var title = "Confirm Deletion", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'Offers?page=Delete&offerId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Offers", formMethod = "GET", actionType = "Delete";
+        changeForm(actionURL, formMethod, actionType);
+    });
+    // Offers Section End--------------------------------------------------------- 
+//
+//
+//
+    // Payments Section Start-------------------------------------------------------
+    $(document).on('click', '#modal-edit-payments', function () {
+        var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Payments?page=Edit&paymentId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Payments", formMethod = "POST", actionType = "Update";
+        changeForm(actionURL, formMethod, actionType);
+    });
+// Payments Section End---------------------------------------------------------
+
 
 // Technician Section Start-----------------------------------------------------
     $(document).on('click', '#modal-update-test-reports', function () {
@@ -291,33 +294,33 @@
     }
 
     (function () {
-    'use strict';
+        'use strict';
 
-    var forms = document.querySelectorAll('.needs-validation');
+        var forms = document.querySelectorAll('.needs-validation');
 
-    Array.prototype.slice.call(forms)
-        .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
+        Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
 
-                form.classList.add('was-validated');
-            }, false);
-        });
-})();
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+    })();
 
 
-$(document).on('input', '#phone_number', function() {
-            var phoneNumber = $(this).val().replace(/\D/g,''); // Remove non-digit characters
-            phoneNumber = phoneNumber.slice(0, 9); // Limit total length to 9 digits
+    $(document).on('input', '#phone_number', function () {
+        var phoneNumber = $(this).val().replace(/\D/g, ''); // Remove non-digit characters
+        phoneNumber = phoneNumber.slice(0, 9); // Limit total length to 9 digits
 
-            // Add +94 prefix if the number is valid
-            if (phoneNumber.length === 9) {
-                phoneNumber = '+94' + phoneNumber;
-            }
+        // Add +94 prefix if the number is valid
+        if (phoneNumber.length === 9) {
+            phoneNumber = '+94' + phoneNumber;
+        }
 
-            $(this).val(phoneNumber); // Update input value
-        });
+        $(this).val(phoneNumber); // Update input value
+    });
 </script>

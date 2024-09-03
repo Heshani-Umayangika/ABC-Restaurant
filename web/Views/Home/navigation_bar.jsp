@@ -1,9 +1,3 @@
-<%-- 
-    Document   : navigation_bar
-    Created on : Mar 17, 2024, 6:11:18 PM
-    Author     : Kelum
---%>
-
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -18,7 +12,7 @@
             <i class="fa-solid fa-gauge-high"></i>
             <span class="ms-4">Dashboard</span> 
         </a>
-        <a href="/ABC_Restaurant/Items_Services">
+        <a href="/ABC_Restaurant/Services">
             <i class="fa-solid fa-burger"></i> 
             <span class="ms-4">Items & Services</span> 
         </a>
@@ -26,7 +20,7 @@
             <i class="fa-solid fa-users"></i> 
             <span class="ms-4">Users</span> 
         </a>
-        <a href="/ABC_Restaurant/Offers">
+        <a href="/ABC_Restaurant/Offers" id="default">
             <i class="fa-solid fa-gift"></i> 
             <span class="ms-4">Offers</span> 
         </a>
@@ -34,7 +28,7 @@
             <i class="fa-solid fa-calendar-check"></i> 
             <span class="ms-4">Reservations</span> 
         </a>
-        <a href="/ABC_Restaurant/Facilities" id="default">
+        <a href="/ABC_Restaurant/Facilities">
             <i class="fa-solid fa-shop"></i> 
             <span class="ms-4">Facilities</span> 
         </a>

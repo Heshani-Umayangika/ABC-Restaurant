@@ -10,9 +10,9 @@ import java.math.BigDecimal;
  *
  * @author Kelum
  */
-public class Services {
+public class ServicesModel {
 
-    public Services(int service_id, String service_name, String description, BigDecimal rate) {
+    public ServicesModel(int service_id, String service_name, String description, BigDecimal rate) {
         this.service_id = service_id;
         this.service_name = service_name;
         this.description = description;

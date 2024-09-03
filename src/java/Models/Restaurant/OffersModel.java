@@ -10,9 +10,9 @@ import java.math.BigDecimal;
  *
  * @author Kelum
  */
-public class Offers {
+public class OffersModel {
 
-    public Offers(int offer_id, String offer_name, String description, String start_date, String end_date, BigDecimal discount_percentage) {
+    public OffersModel(int offer_id, String offer_name, String description, String start_date, String end_date, BigDecimal discount_percentage) {
         this.offer_id = offer_id;
         this.offer_name = offer_name;
         this.description = description;
