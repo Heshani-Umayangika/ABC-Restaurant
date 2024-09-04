@@ -20,21 +20,17 @@
             <i class="fa-solid fa-users"></i> 
             <span class="ms-4">Users</span> 
         </a>
-        <a href="/ABC_Restaurant/Offers" id="default">
+        <a href="/ABC_Restaurant/Offers">
             <i class="fa-solid fa-gift"></i> 
             <span class="ms-4">Offers</span> 
         </a>
-        <a href="/ABC_Restaurant/Reservations">
-            <i class="fa-solid fa-calendar-check"></i> 
+        <a href="/ABC_Restaurant/Reservations" id="default">
+            <i class="fa-solid fa-calendar-day"></i> 
             <span class="ms-4">Reservations</span> 
         </a>
         <a href="/ABC_Restaurant/Facilities">
             <i class="fa-solid fa-shop"></i> 
             <span class="ms-4">Facilities</span> 
-        </a>
-        <a href="/ABC_Restaurant/Gallery">
-            <i class="fa-solid fa-photo-film"></i> 
-            <span class="ms-4">Gallery</span> 
         </a>
         <a href="/ABC_Restaurant/Payments">
             <i class="fa-solid fa-sack-dollar"></i> 
@@ -44,6 +40,11 @@
             <i class="fa-solid fa-headset"></i> 
             <span class="ms-4">Inquiries</span> 
         </a>
+        <a href="/ABC_Restaurant/Gallery">
+            <i class="fa-solid fa-photo-film"></i> 
+            <span class="ms-4">Gallery</span> 
+        </a>
+
         <a href="/ABC_Restaurant/Report">
             <i class="fa-solid fa-chart-line"></i> 
             <span class="ms-4">Reports</span> 
@@ -51,17 +52,17 @@
     </jstl:if>
 
     <jstl:if test="${'Staff' eq sessionScope.authType}">
-        <a href="/ABC_Restaurant/Patients" id="default">
-            <i class="fa-solid fa-users"></i> 
-            <span class="ms-4">Patients</span> 
+        <a href="/ABC_Restaurant/Reservations" id="default">
+            <i class="fa-solid fa-calendar-day"></i> 
+            <span class="ms-4">Reservations</span> 
+        </a>     
+        <a href="/ABC_Restaurant/Offers">
+            <i class="fa-solid fa-gift"></i> 
+            <span class="ms-4">Offers</span> 
         </a>
-        <a href="/ABC_Restaurant/Appointments">
-            <i class="fa-solid fa-calendar-check"></i> 
-            <span class="ms-4">Appointments</span> 
-        </a>
-        <a href="/ABC_Restaurant/Payments">
-            <i class="fa-solid fa-file-invoice-dollar"></i> 
-            <span class="ms-4">Payments</span> 
+        <a href="/ABC_Restaurant/Facilities">
+            <i class="fa-solid fa-shop"></i> 
+            <span class="ms-4">Facilities</span> 
         </a>
     </jstl:if>
 

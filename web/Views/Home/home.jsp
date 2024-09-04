@@ -1,8 +1,3 @@
-<%-- 
-    Document   : home
-    Created on : Mar 17, 2024, 6:11:05 PM
-    Author     : Kelum
---%>
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -39,8 +34,8 @@
             .btn-group .btn {
                 flex: 1;
                 text-align: center;
-                padding: 10px 20px; 
-                font-size: 16px; 
+                padding: 10px 20px;
+                font-size: 16px;
                 border-radius: 0;
             }
 
@@ -50,13 +45,16 @@
             }
 
             .btn-group .btn-outline-dark {
-                border: 1px solid #333; 
+                border: 1px solid #333;
             }
 
             .btn-group input[type="radio"].btn-check {
-                display: none; 
+                display: none;
             }
 
+            .hide-button {
+                display: none;
+            }
 
             .top-bar {
                 height: 60px;
@@ -150,8 +148,27 @@
                     display: block;
                 }
             }
+
+
+            .form-control:focus, .form-select:focus, .form-check-input:focus, .form-control-lg:focus, .form-control-sm:focus {
+                box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.15);
+                border-color: lightgrey;
+            }
+
+
+            input.form-control:focus, textarea.form-control:focus {
+                box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.15);
+                border-color: lightgrey;
+            }
+
+            select.form-control:focus {
+                box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.15);
+                border-color: lightgrey;
+            }
+
+
         </style>
-        <title>ABC Laboratory</title>
+        <title>ABC Restaurant</title>
     </head>
 
     <body>

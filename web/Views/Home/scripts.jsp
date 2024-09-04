@@ -39,7 +39,7 @@
 //
     // Facility Section Start----------------------------------------------------------
     $(document).on('click', '#modal-add-facility', function () {
-        var title = "Confirm Insertion", buttonText = "Save", buttonClass = "btn btn-primary", url = "Facilities?page=Add";
+        var title = "Confirm Registration", buttonText = "Save", buttonClass = "btn btn-primary", url = "Facilities?page=Add";
         openModal(title, buttonText, buttonClass, url);
 
         var actionURL = "Facilities", formMethod = "POST", actionType = "Insert";
@@ -67,7 +67,7 @@
 //
     // Services Section Start---------------------------------------------------
     $(document).on('click', '#modal-add-services', function () {
-        var title = "Confirm Insertion", buttonText = "Save", buttonClass = "btn btn-primary", url = "Services?page=Add";
+        var title = "Confirm Registration", buttonText = "Save", buttonClass = "btn btn-primary", url = "Services?page=Add";
         openModal(title, buttonText, buttonClass, url);
 
         var actionURL = "Services", formMethod = "POST", actionType = "Insert";
@@ -121,7 +121,45 @@
 //
 //
 //
+   // Reservation Section Start-------------------------------------------------------
+    $(document).on('click', '#modal-add-reservations', function () {
+        var title = "Confirm Registration", buttonText = "Save", buttonClass = "btn btn-primary", url = "Reservations?page=Add";
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Reservations", formMethod = "POST", actionType = "Insert";
+        changeForm(actionURL, formMethod, actionType);
+    });
+
+    $(document).on('click', '#modal-edit-reservations', function () {
+        var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Reservations?page=Edit&reservationId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Reservations", formMethod = "POST", actionType = "Update";
+        changeForm(actionURL, formMethod, actionType);
+    });
+
+    $(document).on('click', '#modal-delete-reservations', function () {
+        var title = "Confirm Deletion", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'Reservations?page=Delete&reservationId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "Reservations", formMethod = "GET", actionType = "Delete";
+        changeForm(actionURL, formMethod, actionType);
+    });
+    
+        $(document).on('click', '#modal-info-reservations', function () {
+        var title = "Customer Information", buttonText = "Close", buttonClass = "hide-button", url = 'Reservations?page=Info&customerId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+//
+//        var actionURL = "", formMethod = "", actionType = "";
+//        changeForm(actionURL, formMethod, actionType);
+    });
+    // Reservation Section End--------------------------------------------------------- 
+    // 
+    //  
+    //   
+    //    
     // Payments Section Start-------------------------------------------------------
+    
     $(document).on('click', '#modal-edit-payments', function () {
         var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Payments?page=Edit&paymentId=' + $(this).data('test-id');
         openModal(title, buttonText, buttonClass, url);

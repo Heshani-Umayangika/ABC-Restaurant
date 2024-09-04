@@ -27,12 +27,12 @@ public class HomeController extends HttpServlet {
         if (session != null) {
             String authType = (String) session.getAttribute("authType");
             if (authType == null) {
-                response.sendRedirect("/ABCLaboratory/Login?page=signin");
+                response.sendRedirect("/ABC_Restaurant/Login?page=signin");
             } else {
                 request.getRequestDispatcher("/Views/Home/home.jsp").forward(request, response);
             }
         } else {
-            response.sendRedirect("/ABCLaboratory");
+            response.sendRedirect("/ABC_Restaurant");
         }
     }
 

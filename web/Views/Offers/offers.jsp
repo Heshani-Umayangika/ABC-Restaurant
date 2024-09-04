@@ -5,7 +5,7 @@
 
 <div class="wrapper" style="width:100%;margin:0 auto;">
 
-    &nbsp;  &nbsp;<button type="button" id="modal-add-offers" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id=""><i class="fa-solid fa-user-plus"></i>&nbsp; New</button>
+    &nbsp;  &nbsp;<button type="button" id="modal-add-offers" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id=""><i class="fa-solid fa-gift"></i>&nbsp; New</button>
 
     <div class="container"> 
         <table border="1" id="abc_table" class="display" style="width:100%">
@@ -32,8 +32,8 @@
                         <td> ${offer.start_date} </td>
                         <td> ${offer.end_date} </td>
                         <td> ${offer.discount_percentage}%</td>
-                        <td><button type="button" id="modal-edit-offers" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${offer.offer_id}"><i class="fa-solid fa-user-pen"></i></button></td>
-                        <td><button type="button" id="modal-delete-offers" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${offer.offer_id}"><i class="fa-solid fa-user-minus"></i></button></td>
+                        <td><button type="button" id="modal-edit-offers" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${offer.offer_id}"><i class="fa-solid fa-marker"></i></button></td>
+                        <td><button type="button" id="modal-delete-offers" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${offer.offer_id}"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                 </jstl:forEach>
             </tbody>

@@ -5,9 +5,9 @@
 package Controllers;
 
 import AppServices.DatabaseUtilizer;
-import Models.Restaurant.FacilitiesModel;
-import Models.Restaurant.ServicesModel;
-import Models.Restaurant.UsersModel;
+import Models.FacilitiesModel;
+import Models.ServicesModel;
+import Models.UsersModel;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -100,13 +100,21 @@ public class ServicesController extends HttpServlet {
 
     private void updateService(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      var service = new ServicesModel(Integer.parseInt(request.getParameter("service_id")), request.getParameter("service_name"), request.getParameter("description"), new BigDecimal(request.getParameter("rate")));
+        var service = new ServicesModel(
+                Integer.parseInt(request.getParameter("service_id")),
+                request.getParameter("service_name"),
+                request.getParameter("description"),
+                new BigDecimal(request.getParameter("rate")));
         var isSuccess = DatabaseUtilizer.updateService(service);
     }
 
     private void addService(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      var service = new ServicesModel(0, request.getParameter("service_name"), request.getParameter("description"), new BigDecimal(request.getParameter("rate")));
+        var service = new ServicesModel(
+                0,
+                request.getParameter("service_name"),
+                request.getParameter("description"),
+                new BigDecimal(request.getParameter("rate")));
         var isSuccess = DatabaseUtilizer.addService(service);
     }
 

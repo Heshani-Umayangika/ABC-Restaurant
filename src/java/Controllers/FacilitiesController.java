@@ -5,8 +5,8 @@
 package Controllers;
 
 import AppServices.DatabaseUtilizer;
-import Models.Restaurant.FacilitiesModel;
-import Models.Restaurant.UsersModel;
+import Models.FacilitiesModel;
+import Models.UsersModel;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;

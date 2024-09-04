@@ -5,10 +5,10 @@
 package Controllers;
 
 import AppServices.DatabaseUtilizer;
-import Models.Restaurant.FacilitiesModel;
-import Models.Restaurant.OffersModel;
-import Models.Restaurant.ServicesModel;
-import Models.Restaurant.UsersModel;
+import Models.FacilitiesModel;
+import Models.OffersModel;
+import Models.ServicesModel;
+import Models.UsersModel;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -101,13 +101,25 @@ public class OffersController extends HttpServlet {
 
     private void updateOffers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      var offer = new OffersModel(Integer.parseInt(request.getParameter("offer_id")), request.getParameter("offer_name"), request.getParameter("description"), request.getParameter("start_date"),request.getParameter("end_date"),new BigDecimal(request.getParameter("discount_percentage")));
+        var offer = new OffersModel(
+                Integer.parseInt(request.getParameter("offer_id")),
+                request.getParameter("offer_name"),
+                request.getParameter("description"),
+                request.getParameter("start_date"),
+                request.getParameter("end_date"),
+                new BigDecimal(request.getParameter("discount_percentage")));
         var isSuccess = DatabaseUtilizer.updateOffer(offer);
     }
 
     private void addOffers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      var offer = new OffersModel(0, request.getParameter("offer_name"), request.getParameter("description"), request.getParameter("start_date"),request.getParameter("end_date"),new BigDecimal(request.getParameter("discount_percentage")));
+        var offer = new OffersModel(
+                0,
+                request.getParameter("offer_name"),
+                request.getParameter("description"),
+                request.getParameter("start_date"),
+                request.getParameter("end_date"),
+                new BigDecimal(request.getParameter("discount_percentage")));
         var isSuccess = DatabaseUtilizer.addOffer(offer);
     }
 

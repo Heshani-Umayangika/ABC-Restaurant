@@ -37,7 +37,7 @@
                         <td>${user.email}</td>
                         <td>${user.address}</td>
                         <td>${user.user_type}</td>
-                        <td><button type="button" id="modal-edit-users" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${user.user_id}"><i class="fa-solid fa-user-pen"></i></button></td>
+                        <td><button type="button" id="modal-edit-users" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${user.user_id}"><i class="fa-solid fa-user-pen"></i></button></td>
                         <td><button type="button" id="modal-delete-users" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${user.user_id}"><i class="fa-solid fa-user-minus"></i></button></td>
                     </tr>
                 </jstl:forEach>

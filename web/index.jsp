@@ -70,6 +70,22 @@
             {
                  background-color: lightgrey;
             }
+            
+            .form-control:focus, .form-select:focus, .form-check-input:focus, .form-control-lg:focus, .form-control-sm:focus {
+                box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.15);
+                border-color: lightgrey;
+            }
+
+
+            input.form-control:focus, textarea.form-control:focus {
+                box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.15);
+                border-color: lightgrey;
+            }
+
+            select.form-control:focus {
+                box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.15);
+                border-color: lightgrey;
+            }
         </style>
     </head>
     <body>

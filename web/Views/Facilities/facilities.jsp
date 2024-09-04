@@ -25,8 +25,8 @@
                         <td> ${facility.facility_name} </td>
                         <td> ${facility.description} </td>
                         <td> ${facility.availability_status} </td>
-                        <td><button type="button" id="modal-edit-facility" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${facility.facility_id}"><i class="fa-solid fa-heart-circle-check"></i></button></td>
-                        <td><button type="button" id="modal-delete-facility" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${facility.facility_id}"><i class="fa-solid fa-heart-circle-minus"></i></button></td>
+                        <td><button type="button" id="modal-edit-facility" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${facility.facility_id}"><i class="fa-solid fa-marker"></i></button></td>
+                        <td><button type="button" id="modal-delete-facility" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${facility.facility_id}"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                 </jstl:forEach>
             </tbody>

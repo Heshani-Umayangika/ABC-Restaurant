@@ -20,7 +20,7 @@
     </div>
 
     <div class="mb-3">
-        <label for="gender" class="form-label">Availability:</label>
+        <label for="availability_status" class="form-label">Availability:</label>
         <div class="btn-group" role="group" aria-label="Availability">
             <input type="radio" class="btn-check" name="availability_status" id="NA" autocomplete="off" value="false" checked required/>
             <label class="btn btn-outline-dark" for="NA">Unavailable</label>

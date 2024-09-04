@@ -23,9 +23,9 @@
     <div class="mb-3">
         <label for="gender" class="form-label">Availability:</label>
         <div class="btn-group" role="group" aria-label="Availability">
-            <input type="radio" class="btn-check" name="availability_status" id="NA" autocomplete="off" value="false" <jstl:if test="${facility.availability_status == true}">checked</jstl:if> required/>
+            <input type="radio" class="btn-check" name="availability_status" id="NA" autocomplete="off" value="false" ${facility.availability_status == 'false' ? 'checked' : ''} required/>
             <label class="btn btn-outline-dark" for="NA">Unavailable</label>
-            <input type="radio" class="btn-check" name="availability_status" id="A" autocomplete="off" value="true" <jstl:if test="${facility.availability_status == true}">checked</jstl:if>required/>
+            <input type="radio" class="btn-check" name="availability_status" id="A" autocomplete="off" value="true" ${facility.availability_status == 'true' ? 'checked' : ''} required/>
             <label class="btn btn-outline-dark" for="A">Available</label>
         </div>
     </div>

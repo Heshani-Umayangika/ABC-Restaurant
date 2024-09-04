@@ -5,11 +5,13 @@
 package AppServices;
 
 import AppServices.DatabaseConnector;
-import Models.Restaurant.FacilitiesModel;
-import Models.Restaurant.LoginModel;
-import Models.Restaurant.OffersModel;
-import Models.Restaurant.ServicesModel;
-import Models.Restaurant.UsersModel;
+import Models.CustomersListModel;
+import Models.FacilitiesModel;
+import Models.LoginModel;
+import Models.OffersModel;
+import Models.ReservationsModel;
+import Models.ServicesModel;
+import Models.UsersModel;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -342,7 +344,7 @@ public class DatabaseUtilizer {
             callableStatement.setString(4, offer.getStart_date());
             callableStatement.setString(5, offer.getEnd_date());
             callableStatement.setBigDecimal(6, offer.getDiscount_percentage());
-            
+
             var rowsAffected = callableStatement.executeUpdate();
             return rowsAffected > 0;
         } catch (Exception e) {
@@ -362,8 +364,107 @@ public class DatabaseUtilizer {
         }
         return false;
     }
+
     // Offers Section ------------------------------------------------------
     //
     //    
-    //    
+    //  
+    // Offers Section ------------------------------------------------------
+    public static List<ReservationsModel> getReservationsList() {
+        var reservationsList = new ArrayList<ReservationsModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL ReadReservations()}");
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                var reservation = new ReservationsModel(resultSet.getInt("reservation_id"), resultSet.getInt("customer_id"), resultSet.getString("reservation_date"), resultSet.getString("reservation_time"), resultSet.getInt("number_of_people"), resultSet.getBoolean("service_type"), resultSet.getString("status"), resultSet.getString("special_requests"));
+                reservationsList.add(reservation);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return reservationsList;
+    }
+
+    public static ReservationsModel getReservation(int reservationId) {
+        ReservationsModel reservation = null;
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL ReadReservation(?)}");
+            callableStatement.setInt(1, reservationId);
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                reservation = new ReservationsModel(resultSet.getInt("reservation_id"), resultSet.getInt("customer_id"), resultSet.getString("reservation_date"), resultSet.getString("reservation_time"), resultSet.getInt("number_of_people"), resultSet.getBoolean("service_type"), resultSet.getString("status"), resultSet.getString("special_requests"));
+            }
+        } catch (Exception e) {
+        }
+        return reservation;
+    }
+
+    public static boolean addReservation(ReservationsModel reservation) {
+
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL CreateReservation(?,?,?,?,?,?,?)}");
+            callableStatement.setInt(1, reservation.getCustomer_id());
+            callableStatement.setString(2, reservation.getReservation_date());
+            callableStatement.setString(3, reservation.getReservation_time());
+            callableStatement.setInt(4, reservation.getNumber_of_people());
+            callableStatement.setBoolean(5, reservation.isService_type());
+            callableStatement.setString(6, reservation.getStatus());
+            callableStatement.setString(7, reservation.getSpecial_requests());
+
+            var rowsAffected = callableStatement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return false;
+    }
+
+    public static boolean updateReservation(ReservationsModel reservation) {
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL UpdateReservation(?,?,?,?,?,?,?,?)}");
+            callableStatement.setInt(1, reservation.getReservation_id());
+            callableStatement.setInt(2, reservation.getCustomer_id());
+            callableStatement.setString(3, reservation.getReservation_date());
+            callableStatement.setString(4, reservation.getReservation_time());
+            callableStatement.setInt(5, reservation.getNumber_of_people());
+            callableStatement.setBoolean(6, reservation.isService_type());
+            callableStatement.setString(7, reservation.getStatus());
+            callableStatement.setString(8, reservation.getSpecial_requests());
+
+            var rowsAffected = callableStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return false;
+    }
+
+    public static boolean deleteReservation(int reservationId) {
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL DeleteReservation(?) }");
+            callableStatement.setInt(1, reservationId);
+            var rowsAffected = callableStatement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    public static List<CustomersListModel> getCustomersDropdownList() {
+        var customersList = new ArrayList<CustomersListModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL ReadCustomersList()}");
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                var customer = new CustomersListModel(resultSet.getInt("user_id"), resultSet.getString("customer_name"));
+                customersList.add(customer);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return customersList;
+    }
+    // Offers Section ------------------------------------------------------
 }

@@ -5,7 +5,7 @@
 package Controllers;
 
 import AppServices.DatabaseUtilizer;
-import Models.Restaurant.UsersModel;
+import Models.UsersModel;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -105,13 +105,29 @@ public class UsersController extends HttpServlet {
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         var user = new UsersModel(Integer.parseInt(request.getParameter("user_id")), request.getParameter("first_name"), request.getParameter("last_name"), request.getParameter("phone_number"), request.getParameter("email"), request.getParameter("address"), request.getParameter("user_type"), request.getParameter("password"));
+        var user = new UsersModel(
+                Integer.parseInt(request.getParameter("user_id")),
+                request.getParameter("first_name"),
+                request.getParameter("last_name"),
+                request.getParameter("phone_number"),
+                request.getParameter("email"),
+                request.getParameter("address"),
+                request.getParameter("user_type"),
+                request.getParameter("password"));
         var isSuccess = DatabaseUtilizer.updateUser(user);
     }
 
     private void addUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var user = new UsersModel(0, request.getParameter("first_name"), request.getParameter("last_name"), request.getParameter("phone_number"), request.getParameter("email"), request.getParameter("address"), request.getParameter("user_type"), request.getParameter("password"));
+        var user = new UsersModel(
+                0,
+                request.getParameter("first_name"),
+                request.getParameter("last_name"),
+                request.getParameter("phone_number"),
+                request.getParameter("email"),
+                request.getParameter("address"),
+                request.getParameter("user_type"),
+                request.getParameter("password"));
         var isSuccess = DatabaseUtilizer.addUser(user);
     }
 
