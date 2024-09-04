@@ -9,9 +9,11 @@ import Models.CustomersListModel;
 import Models.FacilitiesModel;
 import Models.LoginModel;
 import Models.OffersModel;
+import Models.PaymentsModel;
 import Models.ReservationsModel;
 import Models.ServicesModel;
 import Models.UsersModel;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -465,6 +467,56 @@ public class DatabaseUtilizer {
             System.err.println(e);
         }
         return customersList;
+    }
+    // Offers Section ------------------------------------------------------
+//    
+//    
+//    
+    // Offers Section ------------------------------------------------------
+    public static List<PaymentsModel> getPaymentsList() {
+        var paymentsList = new ArrayList<PaymentsModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL ReadPayments()}");
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                var payment = new PaymentsModel(resultSet.getInt("payment_id"), resultSet.getInt("reservation_id"),resultSet.getBigDecimal("amount"),resultSet.getString("payment_date"), resultSet.getString("payment_method"), resultSet.getBoolean("payment_status"));
+                paymentsList.add(payment);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return paymentsList;
+    }
+
+    public static PaymentsModel getPayment(int paymentId) {
+        PaymentsModel payment = null;
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL ReadPayment(?)}");
+            callableStatement.setInt(1, paymentId);
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                payment = new PaymentsModel(resultSet.getInt("payment_id"), resultSet.getInt("reservation_id"),resultSet.getBigDecimal("amount"),resultSet.getString("payment_date"), resultSet.getString("payment_method"), resultSet.getBoolean("payment_status"));
+            }
+        } catch (Exception e) {
+        }
+        return payment;
+    }
+
+    public static boolean updatePayment(PaymentsModel payment) {
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL UpdatePayment(?,?,?,?,?)}");
+            callableStatement.setInt(1, payment.getPayment_id());
+            callableStatement.setBigDecimal(2, payment.getAmount());
+            callableStatement.setString(3, payment.getPayment_date());
+            callableStatement.setString(4, payment.getPayment_method());
+            callableStatement.setBoolean(5, payment.isPayment_status());
+
+            var rowsAffected = callableStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return false;
     }
     // Offers Section ------------------------------------------------------
 }

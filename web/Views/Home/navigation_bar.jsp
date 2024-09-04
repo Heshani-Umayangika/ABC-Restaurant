@@ -24,7 +24,7 @@
             <i class="fa-solid fa-gift"></i> 
             <span class="ms-4">Offers</span> 
         </a>
-        <a href="/ABC_Restaurant/Reservations" id="default">
+        <a href="/ABC_Restaurant/Reservations">
             <i class="fa-solid fa-calendar-day"></i> 
             <span class="ms-4">Reservations</span> 
         </a>
@@ -32,7 +32,7 @@
             <i class="fa-solid fa-shop"></i> 
             <span class="ms-4">Facilities</span> 
         </a>
-        <a href="/ABC_Restaurant/Payments">
+        <a href="/ABC_Restaurant/Payments" id="default">
             <i class="fa-solid fa-sack-dollar"></i> 
             <span class="ms-4">Payments</span> 
         </a>

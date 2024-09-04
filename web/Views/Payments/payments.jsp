@@ -16,9 +16,9 @@
             <thead>
                 <tr> 
                     <th>Payment ID</th>  
-                    <th>Appointment ID</th> 
-                    <th>Test</th> 
-                    <th>Charges</th> 
+                    <th>Reservation ID</th> 
+                    <th>Amount</th> 
+                    <th>Payment Date</th> 
                     <th>Payment Method</th> 
                     <th>Status</th> 
                     <th>Edit</th>
@@ -29,12 +29,12 @@
                 <jstl:forEach var="items" items="${paymentsList}" >
                     <tr>
                         <td> ${items.payment_id} </td>
-                        <td> ${items.appointment_id} </td>
-                        <td> ${items.test_name} </td>
-                        <td> ${items.charges} </td>
+                        <td> ${items.reservation_id} </td>
+                        <td> ${items.amount} </td>
+                        <td> ${items.payment_date} </td>
                         <td> ${items.payment_method} </td>
                         <td> ${items.payment_status} </td>
-                        <td><button type="button" id="modal-edit-payments" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${items.payment_id}"><i class="fa-solid fa-file-pen"></i></button></td>
+                        <td><button type="button" id="modal-edit-payments" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${items.payment_id}"><i class="fa-solid fa-hand-holding-dollar"></i></button></td>
                     </tr>
                 </jstl:forEach>
             </tbody>

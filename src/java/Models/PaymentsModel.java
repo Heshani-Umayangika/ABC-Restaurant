@@ -4,13 +4,15 @@
  */
 package Models;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Kelum
  */
 public class PaymentsModel {
 
-    public PaymentsModel(int payment_id, int reservation_id, int amount, String payment_date, String payment_method, boolean payment_status) {
+    public PaymentsModel(int payment_id, int reservation_id, BigDecimal amount, String payment_date, String payment_method, boolean payment_status) {
         this.payment_id = payment_id;
         this.reservation_id = reservation_id;
         this.amount = amount;
@@ -20,7 +22,7 @@ public class PaymentsModel {
     }
     private int payment_id;
     private int reservation_id;
-    private int amount;
+    private BigDecimal amount;
     private String payment_date;
     private String payment_method;
     private boolean payment_status;
@@ -33,7 +35,7 @@ public class PaymentsModel {
         return reservation_id;
     }
 
-    public int getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
