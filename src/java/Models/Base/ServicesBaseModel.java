@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Models;
+package Models.Base;
 
 /**
  *
  * @author Kelum
  */
-public class ServicesListModel {
+public class ServicesBaseModel {
 
     public int getService_id() {
         return service_id;
@@ -18,7 +18,7 @@ public class ServicesListModel {
         return service_name;
     }
 
-    public ServicesListModel(int service_id, String service_name) {
+    public ServicesBaseModel(int service_id, String service_name) {
         this.service_id = service_id;
         this.service_name = service_name;
     }

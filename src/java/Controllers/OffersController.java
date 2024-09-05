@@ -7,7 +7,7 @@ package Controllers;
 import AppServices.DatabaseUtilizer;
 import Models.FacilitiesModel;
 import Models.OffersModel;
-import Models.ServicesModel;
+import Models.Inherited.ServicesModel;
 import Models.UsersModel;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;

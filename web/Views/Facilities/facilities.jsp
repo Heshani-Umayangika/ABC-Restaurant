@@ -24,7 +24,7 @@
                         <td> ${facility.facility_id} </td>
                         <td> ${facility.facility_name} </td>
                         <td> ${facility.description} </td>
-                        <td> ${facility.availability_status} </td>
+                        <td> ${facility.availability_status?"Available":"Unavailable"} </td>
                         <td><button type="button" id="modal-edit-facility" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${facility.facility_id}"><i class="fa-solid fa-marker"></i></button></td>
                         <td><button type="button" id="modal-delete-facility" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${facility.facility_id}"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>

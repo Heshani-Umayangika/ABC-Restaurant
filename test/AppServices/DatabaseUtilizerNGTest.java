@@ -8,7 +8,7 @@ package AppServices;
 import Models.FacilitiesModel;
 import Models.OffersModel;
 import Models.Inherited.ReservationsModel;
-import Models.ServicesModel;
+import Models.Inherited.ServicesModel;
 import Models.UsersModel;
 import java.math.BigDecimal;
 import java.util.List;

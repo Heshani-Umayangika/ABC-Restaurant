@@ -8,7 +8,7 @@
 
 <div class="side-nav bg-primary">
     <jstl:if test="${'Administrator' eq sessionScope.authType}">
-        <a href="/ABC_Restaurant/Dashboard" >
+        <a href="/ABC_Restaurant/Dashboard" id="default">
             <i class="fa-solid fa-gauge-high"></i>
             <span class="ms-4">Dashboard</span> 
         </a>
@@ -38,7 +38,7 @@
             <span class="ms-4">Facilities</span> 
         </a>
         
-        <a href="/ABC_Restaurant/Payments" id="default">
+        <a href="/ABC_Restaurant/Payments">
             <i class="fa-solid fa-sack-dollar"></i> 
             <span class="ms-4">Payments</span> 
         </a>
@@ -51,11 +51,6 @@
         <a href="/ABC_Restaurant/Gallery">
             <i class="fa-solid fa-photo-film"></i> 
             <span class="ms-4">Gallery</span> 
-        </a>
-
-        <a href="/ABC_Restaurant/Report">
-            <i class="fa-solid fa-chart-line"></i> 
-            <span class="ms-4">Reports</span> 
         </a>
     </jstl:if>
 

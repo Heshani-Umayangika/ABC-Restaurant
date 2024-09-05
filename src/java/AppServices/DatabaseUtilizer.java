@@ -12,8 +12,10 @@ import Models.OffersModel;
 import Models.PaymentsModel;
 import Models.Inherited.ReservationsModel;
 import Models.Inherited.ReservationsViewModel;
-import Models.ServicesListModel;
-import Models.ServicesModel;
+import Models.Base.ServicesBaseModel;
+import Models.DailySummaryModel;
+import Models.Inherited.ServicesModel;
+import Models.ProgressModel;
 import Models.UsersModel;
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -212,7 +214,7 @@ public class DatabaseUtilizer {
     //
     //    
     //    
-    // Services Section ------------------------------------------------------
+    // Services Section --------------------------------------------------------
     public static List<ServicesModel> getServicesList() {
         var servicesList = new ArrayList<ServicesModel>();
         try (var connection = DatabaseConnector.getConnection()) {
@@ -286,11 +288,11 @@ public class DatabaseUtilizer {
         return false;
     }
 
-    // Services Section ------------------------------------------------------
+    // Services Section --------------------------------------------------------
     //
     //    
     //    
-    // Offers Section ------------------------------------------------------
+    // Offers Section ----------------------------------------------------------
     public static List<OffersModel> getOffersList() {
         var offersList = new ArrayList<OffersModel>();
         try (var connection = DatabaseConnector.getConnection()) {
@@ -369,11 +371,11 @@ public class DatabaseUtilizer {
         return false;
     }
 
-    // Offers Section ------------------------------------------------------
+    // Offers Section ----------------------------------------------------------
     //
     //    
     //  
-    // Reservation Section ------------------------------------------------------
+    // Reservation Section -----------------------------------------------------
     public static List<ReservationsViewModel> getReservationsList() {
         var reservationsList = new ArrayList<ReservationsViewModel>();
         try (var connection = DatabaseConnector.getConnection()) {
@@ -433,7 +435,7 @@ public class DatabaseUtilizer {
             callableStatement.setString(3, reservation.getReservation_date());
             callableStatement.setString(4, reservation.getReservation_time());
             callableStatement.setInt(5, reservation.getNumber_of_people());
-             callableStatement.setInt(6, reservation.getService_id());
+            callableStatement.setInt(6, reservation.getService_id());
             callableStatement.setBoolean(7, reservation.isService_type());
             callableStatement.setString(8, reservation.getStatus());
             callableStatement.setString(9, reservation.getSpecial_requests());
@@ -473,13 +475,13 @@ public class DatabaseUtilizer {
         return customersList;
     }
 
-    public static List<ServicesListModel> getServicesDropdownList() {
-        var servicesList = new ArrayList<ServicesListModel>();
+    public static List<ServicesBaseModel> getServicesDropdownList() {
+        var servicesList = new ArrayList<ServicesBaseModel>();
         try (var connection = DatabaseConnector.getConnection()) {
             var callableStatement = connection.prepareCall("{CALL ReadServicesList()}");
             var resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
-                var service = new ServicesListModel(resultSet.getInt("service_id"), resultSet.getString("service_name"));
+                var service = new ServicesBaseModel(resultSet.getInt("service_id"), resultSet.getString("service_name"));
                 servicesList.add(service);
             }
         } catch (Exception e) {
@@ -488,11 +490,11 @@ public class DatabaseUtilizer {
         return servicesList;
     }
 
-    // Reservation Section ------------------------------------------------------
+    // Reservation Section -----------------------------------------------------
 //    
 //    
 //    
-    // Payments Section ------------------------------------------------------
+    // Payments Section --------------------------------------------------------
     public static List<PaymentsModel> getPaymentsList() {
         var paymentsList = new ArrayList<PaymentsModel>();
         try (var connection = DatabaseConnector.getConnection()) {
@@ -536,5 +538,83 @@ public class DatabaseUtilizer {
         }
         return false;
     }
-    // Payments Section ------------------------------------------------------
+
+    // Payments Section --------------------------------------------------------
+//    
+//    
+//    
+    // Progress Section --------------------------------------------------------
+    public static DailySummaryModel getDailySummary() {
+        DailySummaryModel summary = null;
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL ReadDailySummary()}");
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                summary = new DailySummaryModel(resultSet.getBigDecimal("total_income_today"), resultSet.getInt("total_customers"), resultSet.getInt("total_reservations_today"), resultSet.getInt("total_paid_reservations_today"));
+            }
+        } catch (Exception e) {
+        }
+        return summary;
+    }
+
+    public static List<ReservationsViewModel> getLatestDineIn() {
+        var summaryList = new ArrayList<ReservationsViewModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL ReadLatestDineInReservations()}");
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                var summary = new ReservationsViewModel(resultSet.getInt("reservation_id"), resultSet.getInt("customer_id"), resultSet.getString("reservation_date"), resultSet.getString("reservation_time"), resultSet.getInt("number_of_people"), resultSet.getString("service_name"), false, "", resultSet.getString("special_requests"));
+                summaryList.add(summary);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return summaryList;
+    }
+
+    public static List<ReservationsViewModel> getLatestDelivery() {
+        var summaryList = new ArrayList<ReservationsViewModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL ReadLatestDeliveryOrders()}");
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                var summary = new ReservationsViewModel(resultSet.getInt("reservation_id"), resultSet.getInt("customer_id"), resultSet.getString("reservation_date"), resultSet.getString("reservation_time"), resultSet.getInt("number_of_people"), resultSet.getString("service_name"), false, "", resultSet.getString("special_requests"));
+                summaryList.add(summary);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return summaryList;
+    }
+
+    public static List<ProgressModel> getLastMonthProgress() {
+        var progressList = new ArrayList<ProgressModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL ReadLastMonthProgress()}");
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                var progress = new ProgressModel( resultSet.getString("payment_day"), resultSet.getBigDecimal("daily_total_income"));
+                progressList.add(progress);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return progressList;
+    }
+    
+    public static List<ProgressModel> getThisMonthProgress() {
+        var progressList = new ArrayList<ProgressModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL ReadThisMonthProgress()}");
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                var progress = new ProgressModel( resultSet.getString("payment_day"), resultSet.getBigDecimal("daily_total_income"));
+                progressList.add(progress);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return progressList;
+    }
+    // Progress Section --------------------------------------------------------
 }
