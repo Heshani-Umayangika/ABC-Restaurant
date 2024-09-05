@@ -76,7 +76,7 @@ public class PaymentsController extends HttpServlet {
 
     private void updatePayment(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var payment = new PaymentsModel(Integer.parseInt(request.getParameter("payment_id")),Integer.parseInt(request.getParameter("reservation_id")),new BigDecimal(request.getParameter("amount")), request.getParameter("payment_date"),request.getParameter("payment_method"), Boolean.parseBoolean(request.getParameter("payment_status")));
+        var payment = new PaymentsModel(Integer.parseInt(request.getParameter("payment_id")),0, "",request.getParameter("payment_method"), (request.getParameter("payment_status") != null));
         var isSuccess = DatabaseUtilizer.updatePayment(payment);
     }
 

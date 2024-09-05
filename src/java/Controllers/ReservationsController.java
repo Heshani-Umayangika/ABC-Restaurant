@@ -7,7 +7,7 @@ package Controllers;
 import AppServices.DatabaseUtilizer;
 import Models.FacilitiesModel;
 import Models.OffersModel;
-import Models.ReservationsModel;
+import Models.Inherited.ReservationsModel;
 import Models.ServicesModel;
 import Models.UsersModel;
 import jakarta.servlet.RequestDispatcher;
@@ -43,7 +43,7 @@ public class ReservationsController extends HttpServlet {
                     getDeleteReservations(request, response);
                 } else if ("Info".equals(page)) {
                     getInfoReservations(request, response);
-                }else {
+                } else {
                     getReservationsList(request, response);
                 }
             }
@@ -58,7 +58,9 @@ public class ReservationsController extends HttpServlet {
         var reservationId = Integer.parseInt(request.getParameter("reservationId"));
         var reservation = DatabaseUtilizer.getReservation(reservationId);
         var customersList = DatabaseUtilizer.getCustomersDropdownList();
+        var servicesList = DatabaseUtilizer.getServicesList();
         request.setAttribute("customersList", customersList);
+        request.setAttribute("servicesList", servicesList);
         request.setAttribute("reservation", reservation);
         request.getRequestDispatcher("/Views/Reservations/edit_reservation.jsp").forward(request, response);
     }
@@ -66,7 +68,9 @@ public class ReservationsController extends HttpServlet {
     private void getAddReservations(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         var customersList = DatabaseUtilizer.getCustomersDropdownList();
+        var servicesList = DatabaseUtilizer.getServicesList();
         request.setAttribute("customersList", customersList);
+        request.setAttribute("servicesList", servicesList);
         request.getRequestDispatcher("/Views/Reservations/add_reservation.jsp").forward(request, response);
     }
 
@@ -92,6 +96,7 @@ public class ReservationsController extends HttpServlet {
         request.getRequestDispatcher("/Views/Reservations/view_customer.jsp").forward(request, response);
     }
 //Post Methods
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -121,6 +126,7 @@ public class ReservationsController extends HttpServlet {
                 request.getParameter("reservation_date"),
                 request.getParameter("reservation_time"),
                 Integer.parseInt(request.getParameter("number_of_people")),
+                Integer.parseInt(request.getParameter("service_id")),
                 Boolean.parseBoolean(request.getParameter("service_type")),
                 request.getParameter("status"),
                 request.getParameter("special_requests"));
@@ -136,6 +142,7 @@ public class ReservationsController extends HttpServlet {
                 request.getParameter("reservation_date"),
                 request.getParameter("reservation_time"),
                 Integer.parseInt(request.getParameter("number_of_people")),
+                Integer.parseInt(request.getParameter("service_id")),
                 Boolean.parseBoolean(request.getParameter("service_type")),
                 request.getParameter("status"),
                 request.getParameter("special_requests"));

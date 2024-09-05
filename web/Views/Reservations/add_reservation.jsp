@@ -27,6 +27,15 @@
     </div>
 
     <div class="mb-3">
+        <label for="service_id" class="form-label">Service:</label>
+        <select id="service_id" name="service_id" class="form-control" required>
+            <jstl:forEach var="items" items="${servicesList}" >
+                <option value='${items.service_id}'>${items.service_name}</option>
+            </jstl:forEach>
+        </select>
+    </div>
+    
+    <div class="mb-3">
         <label for="service_type" class="form-label">Service Type:</label>
         <div class="btn-group" role="group" aria-label="Availability">
             <input type="radio" class="btn-check" name="service_type" id="dine_in" autocomplete="off" value="false" checked required/>

@@ -12,34 +12,42 @@
             <i class="fa-solid fa-gauge-high"></i>
             <span class="ms-4">Dashboard</span> 
         </a>
+        
         <a href="/ABC_Restaurant/Services">
             <i class="fa-solid fa-burger"></i> 
             <span class="ms-4">Items & Services</span> 
         </a>
+        
         <a href="/ABC_Restaurant/Users">
             <i class="fa-solid fa-users"></i> 
             <span class="ms-4">Users</span> 
         </a>
+        
         <a href="/ABC_Restaurant/Offers">
             <i class="fa-solid fa-gift"></i> 
             <span class="ms-4">Offers</span> 
         </a>
+        
         <a href="/ABC_Restaurant/Reservations">
             <i class="fa-solid fa-calendar-day"></i> 
             <span class="ms-4">Reservations</span> 
         </a>
+        
         <a href="/ABC_Restaurant/Facilities">
             <i class="fa-solid fa-shop"></i> 
             <span class="ms-4">Facilities</span> 
         </a>
+        
         <a href="/ABC_Restaurant/Payments" id="default">
             <i class="fa-solid fa-sack-dollar"></i> 
             <span class="ms-4">Payments</span> 
         </a>
+        
         <a href="/ABC_Restaurant/Inquiries">
             <i class="fa-solid fa-headset"></i> 
             <span class="ms-4">Inquiries</span> 
         </a>
+        
         <a href="/ABC_Restaurant/Gallery">
             <i class="fa-solid fa-photo-film"></i> 
             <span class="ms-4">Gallery</span> 
@@ -60,9 +68,15 @@
             <i class="fa-solid fa-gift"></i> 
             <span class="ms-4">Offers</span> 
         </a>
+        
         <a href="/ABC_Restaurant/Facilities">
             <i class="fa-solid fa-shop"></i> 
             <span class="ms-4">Facilities</span> 
+        </a>
+
+        <a href="/ABC_Restaurant/Payments" id="default">
+            <i class="fa-solid fa-sack-dollar"></i> 
+            <span class="ms-4">Payments</span> 
         </a>
     </jstl:if>
 

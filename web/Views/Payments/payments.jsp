@@ -17,7 +17,6 @@
                 <tr> 
                     <th>Payment ID</th>  
                     <th>Reservation ID</th> 
-                    <th>Amount</th> 
                     <th>Payment Date</th> 
                     <th>Payment Method</th> 
                     <th>Status</th> 
@@ -30,10 +29,9 @@
                     <tr>
                         <td> ${items.payment_id} </td>
                         <td> ${items.reservation_id} </td>
-                        <td> ${items.amount} </td>
                         <td> ${items.payment_date} </td>
                         <td> ${items.payment_method} </td>
-                        <td> ${items.payment_status} </td>
+                        <td> ${items.payment_status ? "Paid":"Not paid"} </td>
                         <td><button type="button" id="modal-edit-payments" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${items.payment_id}"><i class="fa-solid fa-hand-holding-dollar"></i></button></td>
                     </tr>
                 </jstl:forEach>

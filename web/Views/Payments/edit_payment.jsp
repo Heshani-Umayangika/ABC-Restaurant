@@ -5,9 +5,6 @@
 <div class="container">
 
     <input type="hidden" id="payment_id" name="payment_id" value='${payment.payment_id}'/>
-    <input type="hidden" id="reservation_id" name="reservation_id" value='${payment.reservation_id}'/>
-    <input type="hidden" id="amount" name="amount" value='${payment.amount}'/>
-    <input type="hidden" id="payment_date" name="payment_date" value='${payment.payment_date}'/>
     
     <div class="mb-3">
         <label for="payment_method" class="form-label">Payment Method</label>
@@ -22,7 +19,7 @@
     <div class="mb-3">
         <label for="payment_status" class="form-label">Payment Status</label>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="payment_status" name="payment_status" ${payment.payment_status ? 'checked' : ''}/>
+            <input class="form-check-input" type="checkbox" id="payment_status" name="payment_status" ${Boolean(payment.payment_status) ? 'checked' : ''}/>
             <label class="form-check-label" for="payment_status">Paid</label>
         </div>
     </div>

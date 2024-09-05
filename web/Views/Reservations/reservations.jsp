@@ -1,8 +1,3 @@
-<%-- 
-    Document   : users
-    Created on : Mar 17, 2024, 6:18:48 PM
-    Author     : Kelum
---%>
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,8 +12,9 @@
                     <th>Customer</th> 
                     <th>Date</th> 
                     <th>Time</th>
-                    <th>Number of People</th>
-                    <th>Service Type</th>
+                    <th>People</th>
+                    <th>Service</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th>Special Requests</th>
                     <th>Edit</th>
@@ -36,7 +32,8 @@
                         <td>${reservation.reservation_date}</td>
                         <td>${reservation.reservation_time}</td>
                         <td>${reservation.number_of_people}</td>
-                        <td>${reservation.service_type}</td>
+                        <td>${reservation.service_name}</td>
+                        <td>${reservation.service_type eq 'true'? 'Dine-In':'Delivery'}</td>
                         <td>${reservation.status}</td>
                         <td>${reservation.special_requests}</td>
                         <td><button type="button" id="modal-edit-reservations" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${reservation.reservation_id}"><i class="fa-solid fa-calendar-check"></i></button></td>

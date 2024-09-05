@@ -12,17 +12,15 @@ import java.math.BigDecimal;
  */
 public class PaymentsModel {
 
-    public PaymentsModel(int payment_id, int reservation_id, BigDecimal amount, String payment_date, String payment_method, boolean payment_status) {
+    public PaymentsModel(int payment_id, int reservation_id, String payment_date, String payment_method, boolean payment_status) {
         this.payment_id = payment_id;
         this.reservation_id = reservation_id;
-        this.amount = amount;
         this.payment_date = payment_date;
         this.payment_method = payment_method;
         this.payment_status = payment_status;
     }
     private int payment_id;
     private int reservation_id;
-    private BigDecimal amount;
     private String payment_date;
     private String payment_method;
     private boolean payment_status;
@@ -33,10 +31,6 @@ public class PaymentsModel {
 
     public int getReservation_id() {
         return reservation_id;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
     }
 
     public String getPayment_date() {
