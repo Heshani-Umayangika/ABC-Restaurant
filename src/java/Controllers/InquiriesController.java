@@ -14,8 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 
-@WebServlet(name = "OffersController", urlPatterns = {"/Offers"})
-public class OffersController extends HttpServlet {
+@WebServlet(name = "InquiriesController", urlPatterns = {"/Inquiries"})
+public class InquiriesController extends HttpServlet {
 
 //Get Methods
     @Override
@@ -35,7 +35,7 @@ public class OffersController extends HttpServlet {
                 } else if ("Delete".equals(page)) {
                     getDeleteOffers(request, response);
                 } else {
-                    getOffersList(request, response);
+                    getInquiriesList(request, response);
                 }
             }
         } else {
@@ -65,11 +65,11 @@ public class OffersController extends HttpServlet {
         request.getRequestDispatcher("/Views/Offers/delete_offers.jsp").forward(request, response);
     }
 
-    private void getOffersList(HttpServletRequest request, HttpServletResponse response)
+    private void getInquiriesList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var offersList = RestaurantDatabaseUtilizer.getOffersList();
-        request.setAttribute("offersList", offersList);
-        request.getRequestDispatcher("/Views/Offers/offers.jsp").forward(request, response);
+        var inquiriesList = RestaurantDatabaseUtilizer.getInquiriesList();
+        request.setAttribute("inquiriesList", inquiriesList);
+        request.getRequestDispatcher("/Views/Inquiries/inquiries.jsp").forward(request, response);
     }
 
 //Post Methods

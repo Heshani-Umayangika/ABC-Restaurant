@@ -4,20 +4,15 @@
  */
 package Controllers;
 
-import AppServices.DatabaseUtilizer;
-import Models.FacilitiesModel;
+import AppServices.RestaurantDatabaseUtilizer;
 import Models.Inherited.ServicesModel;
-import Models.UsersModel;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
-import java.util.HashSet;
 
 @WebServlet(name = "ServicesController", urlPatterns = {"/Services"})
 public class ServicesController extends HttpServlet {
@@ -52,7 +47,7 @@ public class ServicesController extends HttpServlet {
             throws ServletException, IOException {
 
         var serviceId = Integer.parseInt(request.getParameter("serviceId"));
-        var service = DatabaseUtilizer.getService(serviceId);
+        var service = RestaurantDatabaseUtilizer.getService(serviceId);
 
         request.setAttribute("service", service);
         request.getRequestDispatcher("/Views/Services/edit_services.jsp").forward(request, response);
@@ -72,7 +67,7 @@ public class ServicesController extends HttpServlet {
 
     private void getServicesList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var servicesList = DatabaseUtilizer.getServicesList();
+        var servicesList = RestaurantDatabaseUtilizer.getServicesList();
         request.setAttribute("servicesList", servicesList);
         request.getRequestDispatcher("/Views/Services/services.jsp").forward(request, response);
     }
@@ -95,7 +90,7 @@ public class ServicesController extends HttpServlet {
             throws ServletException, IOException {
 
         var serviceId = Integer.parseInt(request.getParameter("serviceId"));
-        var isSuccess = DatabaseUtilizer.deleteService(serviceId);
+        var isSuccess = RestaurantDatabaseUtilizer.deleteService(serviceId);
     }
 
     private void updateService(HttpServletRequest request, HttpServletResponse response)
@@ -105,7 +100,7 @@ public class ServicesController extends HttpServlet {
                 request.getParameter("service_name"),
                 request.getParameter("description"),
                 new BigDecimal(request.getParameter("rate")));
-        var isSuccess = DatabaseUtilizer.updateService(service);
+        var isSuccess = RestaurantDatabaseUtilizer.updateService(service);
     }
 
     private void addService(HttpServletRequest request, HttpServletResponse response)
@@ -115,7 +110,7 @@ public class ServicesController extends HttpServlet {
                 request.getParameter("service_name"),
                 request.getParameter("description"),
                 new BigDecimal(request.getParameter("rate")));
-        var isSuccess = DatabaseUtilizer.addService(service);
+        var isSuccess = RestaurantDatabaseUtilizer.addService(service);
     }
 
 }

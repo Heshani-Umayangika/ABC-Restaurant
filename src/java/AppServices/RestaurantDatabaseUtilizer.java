@@ -15,8 +15,11 @@ import Models.Inherited.ReservationsViewModel;
 import Models.Base.ServicesBaseModel;
 import Models.DailySummaryModel;
 import Models.Inherited.ServicesModel;
+import Models.Inherited.InquiriesModel;
+import Models.Inherited.InquiriesViewModel;
 import Models.ProgressModel;
 import Models.UsersModel;
+import jakarta.resource.cci.ResultSet;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -27,7 +30,7 @@ import java.util.List;
  *
  * @author Kelum
  */
-public class DatabaseUtilizer {
+public class RestaurantDatabaseUtilizer {
 
     // Login Section -----------------------------------------------------------
     public static LoginModel signIn(String username, String password) {
@@ -38,7 +41,7 @@ public class DatabaseUtilizer {
             callableStatement.setString(2, password);
             var resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
-                user = new LoginModel(resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("user_type"));
+                user = new LoginModel(resultSet.getInt("user_id"), resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("user_type"));
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -391,6 +394,21 @@ public class DatabaseUtilizer {
         return reservationsList;
     }
 
+    public static List<ReservationsViewModel> getUserReservationsList(int userId) {
+        var userReservationsList = new ArrayList<ReservationsViewModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL ReadUserReservations(?)}");
+                callableStatement.setInt(1, userId);
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+               var reservation = new ReservationsViewModel(resultSet.getInt("reservation_id"), resultSet.getInt("customer_id"), resultSet.getString("reservation_date"), resultSet.getString("reservation_time"), resultSet.getInt("number_of_people"), resultSet.getString("service_name"), resultSet.getBoolean("service_type"), resultSet.getString("status"), resultSet.getString("special_requests"));
+               userReservationsList.add(reservation);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return userReservationsList;
+    }
     public static ReservationsModel getReservation(int reservationId) {
         ReservationsModel reservation = null;
         try (var connection = DatabaseConnector.getConnection()) {
@@ -617,4 +635,82 @@ public class DatabaseUtilizer {
         return progressList;
     }
     // Progress Section --------------------------------------------------------
+//
+//
+//    
+    // Inquiries Section -------------------------------------------------------
+        public static List<InquiriesViewModel> getInquiriesList() {
+        var inquiriesList = new ArrayList<InquiriesViewModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL ReadInquiries()}");
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                var inquiry = new InquiriesViewModel(resultSet.getInt("inquiry_id"), resultSet.getString("customer_name"), resultSet.getString("subject"), resultSet.getString("message"),resultSet.getString("submitted_at"));
+                inquiriesList.add(inquiry);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return inquiriesList;
+    }
+        
+    public static List<InquiriesViewModel> getUserInquiriesList(int userId) {
+        var userInquiriesList = new ArrayList<InquiriesViewModel>();
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL ReadUserInquiries(?)}");
+                callableStatement.setInt(1, userId);
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                var inquiry = new InquiriesViewModel(resultSet.getInt("inquiry_id"), resultSet.getString("customer_name"), resultSet.getString("subject"), resultSet.getString("message"),resultSet.getString("submitted_at"));
+                userInquiriesList.add(inquiry);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return userInquiriesList;
+    }
+    
+        public static InquiriesModel getInquiry(int inquiryId) {
+        InquiriesModel inquiry = null;
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL ReadInquiry(?)}");
+            callableStatement.setInt(1, inquiryId);
+            var resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                inquiry = new InquiriesModel(resultSet.getInt("inquiry_id"), resultSet.getInt("user_id"), resultSet.getString("subject"), resultSet.getString("message"),resultSet.getString("submitted_at"));
+            }
+        } catch (Exception e) {
+        }
+        return inquiry;
+    }
+        
+        public static boolean addInquiry(InquiriesModel inquiry) {
+
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{CALL CreateInquiry(?,?,?)}");
+            callableStatement.setInt(1, inquiry.getUser_id());
+            callableStatement.setString(2, inquiry.getSubject());
+            callableStatement.setString(3, inquiry.getMessage());
+  
+            var rowsAffected = callableStatement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return false;
+    }
+        
+            public static boolean deleteInquiry(int reservationId) {
+        try (var connection = DatabaseConnector.getConnection()) {
+            var callableStatement = connection.prepareCall("{ CALL DeleteInquiry(?) }");
+            callableStatement.setInt(1, reservationId);
+            var rowsAffected = callableStatement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    // Inquiries Section -------------------------------------------------------
 }

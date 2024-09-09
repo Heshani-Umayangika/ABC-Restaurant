@@ -4,22 +4,14 @@
  */
 package Controllers;
 
-import AppServices.DatabaseUtilizer;
-import Models.FacilitiesModel;
-import Models.OffersModel;
+import AppServices.RestaurantDatabaseUtilizer;
 import Models.Inherited.ReservationsModel;
-import Models.Inherited.ServicesModel;
-import Models.UsersModel;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
-import java.util.HashSet;
 
 @WebServlet(name = "ReservationsController", urlPatterns = {"/Reservations"})
 public class ReservationsController extends HttpServlet {
@@ -56,9 +48,9 @@ public class ReservationsController extends HttpServlet {
             throws ServletException, IOException {
 
         var reservationId = Integer.parseInt(request.getParameter("reservationId"));
-        var reservation = DatabaseUtilizer.getReservation(reservationId);
-        var customersList = DatabaseUtilizer.getCustomersDropdownList();
-        var servicesList = DatabaseUtilizer.getServicesList();
+        var reservation = RestaurantDatabaseUtilizer.getReservation(reservationId);
+        var customersList = RestaurantDatabaseUtilizer.getCustomersDropdownList();
+        var servicesList = RestaurantDatabaseUtilizer.getServicesList();
         request.setAttribute("customersList", customersList);
         request.setAttribute("servicesList", servicesList);
         request.setAttribute("reservation", reservation);
@@ -67,8 +59,8 @@ public class ReservationsController extends HttpServlet {
 
     private void getAddReservations(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var customersList = DatabaseUtilizer.getCustomersDropdownList();
-        var servicesList = DatabaseUtilizer.getServicesList();
+        var customersList = RestaurantDatabaseUtilizer.getCustomersDropdownList();
+        var servicesList = RestaurantDatabaseUtilizer.getServicesList();
         request.setAttribute("customersList", customersList);
         request.setAttribute("servicesList", servicesList);
         request.getRequestDispatcher("/Views/Reservations/add_reservation.jsp").forward(request, response);
@@ -83,7 +75,7 @@ public class ReservationsController extends HttpServlet {
 
     private void getReservationsList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var reservationsList = DatabaseUtilizer.getReservationsList();
+        var reservationsList = RestaurantDatabaseUtilizer.getReservationsList();
         request.setAttribute("reservationsList", reservationsList);
         request.getRequestDispatcher("/Views/Reservations/reservations.jsp").forward(request, response);
     }
@@ -91,7 +83,7 @@ public class ReservationsController extends HttpServlet {
     private void getInfoReservations(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         var customerId = Integer.parseInt(request.getParameter("customerId"));
-        var user = DatabaseUtilizer.getUser(customerId);
+        var user = RestaurantDatabaseUtilizer.getUser(customerId);
         request.setAttribute("user", user);
         request.getRequestDispatcher("/Views/Reservations/view_customer.jsp").forward(request, response);
     }
@@ -114,8 +106,7 @@ public class ReservationsController extends HttpServlet {
             throws ServletException, IOException {
 
         var reservationId = Integer.parseInt(request.getParameter("reservationId"));
-        System.out.println(reservationId);
-        var isSuccess = DatabaseUtilizer.deleteReservation(reservationId);
+        var isSuccess = RestaurantDatabaseUtilizer.deleteReservation(reservationId);
     }
 
     private void updateReservations(HttpServletRequest request, HttpServletResponse response)
@@ -131,7 +122,7 @@ public class ReservationsController extends HttpServlet {
                 request.getParameter("status"),
                 request.getParameter("special_requests"));
 
-        var isSuccess = DatabaseUtilizer.updateReservation(reservation);
+        var isSuccess = RestaurantDatabaseUtilizer.updateReservation(reservation);
     }
 
     private void addReservations(HttpServletRequest request, HttpServletResponse response)
@@ -146,7 +137,7 @@ public class ReservationsController extends HttpServlet {
                 Boolean.parseBoolean(request.getParameter("service_type")),
                 request.getParameter("status"),
                 request.getParameter("special_requests"));
-        var isSuccess = DatabaseUtilizer.addReservation(reservation);
+        var isSuccess = RestaurantDatabaseUtilizer.addReservation(reservation);
     }
 
 }

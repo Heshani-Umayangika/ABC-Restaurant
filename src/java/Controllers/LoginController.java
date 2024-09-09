@@ -4,7 +4,7 @@
  */
 package Controllers;
 
-import AppServices.DatabaseUtilizer;
+import AppServices.RestaurantDatabaseUtilizer;
 import com.google.gson.Gson;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpSession;
 import com.google.gson.JsonObject;
 
 /**
@@ -85,14 +84,14 @@ public class LoginController extends HttpServlet {
     private void signIn(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         var session = request.getSession();
-        var user = DatabaseUtilizer.signIn(request.getParameter("username"), request.getParameter("password"));
+        var user = RestaurantDatabaseUtilizer.signIn(request.getParameter("username"), request.getParameter("password"));
         if (user != null) {
             session.setAttribute("isUser", true);
+            session.setAttribute("userId", user.getUser_id());
             session.setAttribute("userName", user.getFirst_name() + " " + user.getLast_name());
             session.setAttribute("authType", user.getUser_type());
             response.sendRedirect("/ABC_Restaurant/Home");
         } else {
-            
             session.setAttribute("isUser", false);
             response.sendRedirect("/ABC_Restaurant/Login?page=signin");
         }

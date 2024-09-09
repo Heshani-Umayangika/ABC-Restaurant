@@ -4,18 +4,14 @@
  */
 package Controllers;
 
-import AppServices.DatabaseUtilizer;
+import AppServices.RestaurantDatabaseUtilizer;
 import Models.FacilitiesModel;
-import Models.UsersModel;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.HashSet;
 
 @WebServlet(name = "FacilitiesController", urlPatterns = {"/Facilities"})
 public class FacilitiesController extends HttpServlet {
@@ -50,7 +46,7 @@ public class FacilitiesController extends HttpServlet {
             throws ServletException, IOException {
 
         var facilityId = Integer.parseInt(request.getParameter("facilityId"));
-        var facility = DatabaseUtilizer.getFacility(facilityId);
+        var facility = RestaurantDatabaseUtilizer.getFacility(facilityId);
 
         request.setAttribute("facility", facility);
         request.getRequestDispatcher("/Views/Facilities/edit_facilities.jsp").forward(request, response);
@@ -70,7 +66,7 @@ public class FacilitiesController extends HttpServlet {
 
     private void getFacilitiesList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var facilitiesList = DatabaseUtilizer.getFacilitiesList();
+        var facilitiesList = RestaurantDatabaseUtilizer.getFacilitiesList();
         request.setAttribute("facilitiesList", facilitiesList);
         request.getRequestDispatcher("/Views/Facilities/facilities.jsp").forward(request, response);
     }
@@ -93,20 +89,20 @@ public class FacilitiesController extends HttpServlet {
             throws ServletException, IOException {
 
         var facilityId = Integer.parseInt(request.getParameter("facilityId"));
-        var isSuccess = DatabaseUtilizer.deleteFacility(facilityId);
+        var isSuccess = RestaurantDatabaseUtilizer.deleteFacility(facilityId);
     }
 
     private void updateFacility(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         var facility = new FacilitiesModel(Integer.parseInt(request.getParameter("facility_id")), request.getParameter("facility_name"), request.getParameter("description"), Boolean.parseBoolean(request.getParameter("availability_status")));
-        var isSuccess = DatabaseUtilizer.updateFacility(facility);
+        var isSuccess = RestaurantDatabaseUtilizer.updateFacility(facility);
     }
 
     private void addFacility(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("");
       var facility = new FacilitiesModel(0, request.getParameter("facility_name"), request.getParameter("description"), Boolean.parseBoolean(request.getParameter("availability_status")));
-        var isSuccess = DatabaseUtilizer.addFacility(facility);
+        var isSuccess = RestaurantDatabaseUtilizer.addFacility(facility);
     }
 
 }

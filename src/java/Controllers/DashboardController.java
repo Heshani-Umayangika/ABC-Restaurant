@@ -4,12 +4,8 @@
  */
 package Controllers;
 
-import AppServices.DatabaseUtilizer;
-import Models.FacilitiesModel;
-import Models.UsersModel;
-import jakarta.servlet.RequestDispatcher;
+import AppServices.RestaurantDatabaseUtilizer;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @WebServlet(name = "DashboardController", urlPatterns = {"/Dashboard"})
@@ -44,16 +39,16 @@ public class DashboardController extends HttpServlet {
 
     private void getDashboard(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var dailySummary = DatabaseUtilizer.getDailySummary();
+        var dailySummary = RestaurantDatabaseUtilizer.getDailySummary();
         request.setAttribute("dailySummary", dailySummary);
 
-        var dineInList = DatabaseUtilizer.getLatestDineIn();
+        var dineInList = RestaurantDatabaseUtilizer.getLatestDineIn();
         request.setAttribute("dineInList", dineInList);
 
-        var deliveryList = DatabaseUtilizer.getLatestDelivery();
+        var deliveryList = RestaurantDatabaseUtilizer.getLatestDelivery();
         request.setAttribute("deliveryList", deliveryList);
 
-        var lastMonth = DatabaseUtilizer.getLastMonthProgress();
+        var lastMonth = RestaurantDatabaseUtilizer.getLastMonthProgress();
         List<String> lastMonthDays = new ArrayList<>();
         List<BigDecimal> lastMonthCounts = new ArrayList<>();
         for (var item : lastMonth) {
@@ -63,7 +58,7 @@ public class DashboardController extends HttpServlet {
         request.setAttribute("lastMonthDays", lastMonthDays);
         request.setAttribute("lastMonthCounts", lastMonthCounts);
 
-        var thisMonth = DatabaseUtilizer.getThisMonthProgress();
+        var thisMonth = RestaurantDatabaseUtilizer.getThisMonthProgress();
         List<String> thisMonthDays = new ArrayList<>();
         List<BigDecimal> thisMonthCounts = new ArrayList<>();
         for (var item : thisMonth) {

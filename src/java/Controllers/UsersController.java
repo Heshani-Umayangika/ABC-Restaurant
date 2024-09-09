@@ -4,17 +4,14 @@
  */
 package Controllers;
 
-import AppServices.DatabaseUtilizer;
+import AppServices.RestaurantDatabaseUtilizer;
 import Models.UsersModel;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.HashSet;
 
 /**
  *
@@ -54,7 +51,7 @@ public class UsersController extends HttpServlet {
     private void getEditUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         var userId = Integer.parseInt(request.getParameter("userId"));
-        var user = DatabaseUtilizer.getUser(userId);
+        var user = RestaurantDatabaseUtilizer.getUser(userId);
         request.setAttribute("user", user);
         request.getRequestDispatcher("/Views/Users/edit_user.jsp").forward(request, response);
     }
@@ -76,7 +73,7 @@ public class UsersController extends HttpServlet {
     // Loading Users Page [Users List Retrieved]
     private void getUsersList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var usersList = DatabaseUtilizer.getUsersList();
+        var usersList = RestaurantDatabaseUtilizer.getUsersList();
 
         request.setAttribute("usersList", usersList);
         request.getRequestDispatcher("/Views/Users/users.jsp").forward(request, response);
@@ -100,7 +97,7 @@ public class UsersController extends HttpServlet {
             throws ServletException, IOException {
 
         var userId = Integer.parseInt(request.getParameter("user_id"));
-        var isSuccess = DatabaseUtilizer.deleteUser(userId);
+        var isSuccess = RestaurantDatabaseUtilizer.deleteUser(userId);
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
@@ -114,7 +111,7 @@ public class UsersController extends HttpServlet {
                 request.getParameter("address"),
                 request.getParameter("user_type"),
                 request.getParameter("password"));
-        var isSuccess = DatabaseUtilizer.updateUser(user);
+        var isSuccess = RestaurantDatabaseUtilizer.updateUser(user);
     }
 
     private void addUser(HttpServletRequest request, HttpServletResponse response)
@@ -128,7 +125,7 @@ public class UsersController extends HttpServlet {
                 request.getParameter("address"),
                 request.getParameter("user_type"),
                 request.getParameter("password"));
-        var isSuccess = DatabaseUtilizer.addUser(user);
+        var isSuccess = RestaurantDatabaseUtilizer.addUser(user);
     }
 
 }

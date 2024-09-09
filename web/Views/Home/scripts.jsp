@@ -170,15 +170,39 @@
 // Payments Section End---------------------------------------------------------
 
 
-// Technician Section Start-----------------------------------------------------
-    $(document).on('click', '#modal-update-test-reports', function () {
-        var title = "Confirm Modification", buttonText = "Save", buttonClass = "btn btn-primary", url = '/ABC_Restaurant/Technician?page=UpdateTestReport&testReportId=' + $(this).data('test-id');
+// Customer Section Start-----------------------------------------------------
+    $(document).on('click', '#modal-add-myInquiries', function () {
+        var title = "Write Inquiries", buttonText = "Send", buttonClass = "btn btn-primary", url = "MyInquiries?page=Add";
         openModal(title, buttonText, buttonClass, url);
 
-        var actionURL = "Technician", formMethod = "POST", actionType = "Update";
+        var actionURL = "MyInquiries", formMethod = "POST", actionType = "Insert";
         changeForm(actionURL, formMethod, actionType);
     });
-// Technician Section End-------------------------------------------------------
+    
+        $(document).on('click', '#modal-delete-myInquiries', function () {
+        var title = "Deleting the record !", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'MyInquiries?page=Delete&inquiryId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "MyInquiries", formMethod = "GET", actionType = "Delete";
+        changeForm(actionURL, formMethod, actionType);
+    });
+    
+    $(document).on('click', '#modal-add-my-reservations', function () {
+        var title = "Confirm Reservation", buttonText = "Save", buttonClass = "btn btn-primary", url = "MyReservations?page=Add";
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "MyReservations", formMethod = "POST", actionType = "Insert";
+        changeForm(actionURL, formMethod, actionType);
+    });
+    
+        $(document).on('click', '#modal-delete-my-reservations', function () {
+        var title = "Deleting the record !", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'MyReservations?page=Delete&reservationId=' + $(this).data('test-id');
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "MyReservations", formMethod = "GET", actionType = "Delete";
+        changeForm(actionURL, formMethod, actionType);
+    });
+// Customer Section End-------------------------------------------------------
 
 // Visitor Section Start--------------------------------------------------------
     $(document).on('click', '#modal-download-visitor', function () {
