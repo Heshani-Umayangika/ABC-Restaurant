@@ -5,6 +5,7 @@
 package Controllers;
 
 import AppServices.RestaurantDatabaseUtilizer;
+import Models.Inherited.InquiriesModel;
 import Models.PaymentsModel;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -14,8 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 
-@WebServlet(name = "PaymentsController", urlPatterns = {"/Payments"})
-public class PaymentsController extends HttpServlet {
+@WebServlet(name = "MyPaymentsController", urlPatterns = {"/MyPayments"})
+public class MyPaymentsController extends HttpServlet {
 
 //Get Methods
     @Override
@@ -28,10 +29,11 @@ public class PaymentsController extends HttpServlet {
                 response.sendRedirect("/ABC_Restaurant/Login?page=signin");
             } else {
                 var page = request.getParameter("page");
-                if ("Edit".equals(page)) {
-                    getEditPayment(request, response);
+                if ("Pay".equals(page)) {
+                    getMakePayment(request, response);
                 } else {
-                    getPaymentsList(request, response);
+                    int userId = (int) session.getAttribute("userId");
+                    getMyPaymentsList(request, response, userId);
                 }
             }
         } else {
@@ -39,40 +41,33 @@ public class PaymentsController extends HttpServlet {
         }
     }
 
-    private void getEditPayment(HttpServletRequest request, HttpServletResponse response)
+    private void getMakePayment(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         var paymentId = Integer.parseInt(request.getParameter("paymentId"));
-        System.out.println(paymentId);
-        var payment = RestaurantDatabaseUtilizer.getPayment(paymentId);
-
-        request.setAttribute("payment", payment);
-        request.getRequestDispatcher("/Views/Payments/edit_payment.jsp").forward(request, response);
+        var amount = request.getParameter("amount");
+        request.setAttribute("amount", amount);
+        request.setAttribute("paymentId", paymentId);
+        request.getRequestDispatcher("/Views/Customer/make_payment.jsp").forward(request, response);
     }
 
-    private void getPaymentsList(HttpServletRequest request, HttpServletResponse response)
+    private void getMyPaymentsList(HttpServletRequest request, HttpServletResponse response, int userId)
             throws ServletException, IOException {
-        var paymentsList = RestaurantDatabaseUtilizer.getPaymentsList();
-        request.setAttribute("paymentsList", paymentsList);
-        request.getRequestDispatcher("/Views/Payments/payments.jsp").forward(request, response);
+        var myPaymentsList = RestaurantDatabaseUtilizer.getUserPaymentsList(userId);
+        request.setAttribute("myPaymentsList", myPaymentsList);
+        request.getRequestDispatcher("/Views/Customer/my_payments.jsp").forward(request, response);
     }
 
 //Post Methods
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var action = request.getParameter("action");
-        if ("Update".equals(action)) {
-            updatePayment(request, response);
-        } else {
-            System.err.println("Wront Method");
-        }
+        addMyPayment(request, response);
     }
 
-
-    private void updatePayment(HttpServletRequest request, HttpServletResponse response)
+    private void addMyPayment(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        var payment = new PaymentsModel(Integer.parseInt(request.getParameter("payment_id")),0, "",request.getParameter("payment_method"), (request.getParameter("payment_status") != null),0,"",new BigDecimal(0.00),"","");
+        System.out.println("Add Method trigged");
+        var payment = new PaymentsModel(Integer.parseInt(request.getParameter("payment_id")),0, "","Card", true,0,"",new BigDecimal(0.00),"","");
         var isSuccess = RestaurantDatabaseUtilizer.updatePayment(payment);
     }
 

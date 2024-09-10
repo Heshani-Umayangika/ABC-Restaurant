@@ -58,9 +58,7 @@ public class MyReservationsController extends HttpServlet {
 
     private void getMyReservationsList(HttpServletRequest request, HttpServletResponse response, int userId)
             throws ServletException, IOException {
-        System.out.println(userId);
         var userReservationsList = RestaurantDatabaseUtilizer.getUserReservationsList(userId);
-        System.out.println(userReservationsList!=null);
         request.setAttribute("userReservationsList", userReservationsList);
         request.getRequestDispatcher("/Views/Customer/my_reservations.jsp").forward(request, response);
     }

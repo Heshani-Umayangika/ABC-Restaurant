@@ -11,7 +11,7 @@
                 <tr> 
                     <th>Payment ID</th>  
                     <th>Reservation ID</th> 
-                    <th>Customer</th> 
+                    <th>Servings</th> 
                     <th>Service</th> 
                     <th>Charges</th> 
                     <th>Payment Date</th> 
@@ -22,17 +22,17 @@
             </thead>
 
             <tbody>
-                <jstl:forEach var="items" items="${paymentsList}" >
+                <jstl:forEach var="items" items="${myPaymentsList}" >
                     <tr>
                         <td> ${items.payment_id} </td>
                         <td> ${items.reservation_id} </td>
-                        <td> ${items.customer_name} </td>
+                        <td> ${items.number_of_people} </td>
                         <td> ${items.service_name} </td>
                         <td> ${items.rate} </td>
                         <td> ${items.payment_date} </td>
                         <td> ${items.payment_method} </td>
                         <td> ${items.payment_status ? "Paid":"Not paid"} </td>
-                        <td><button type="button" id="modal-edit-payments" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${items.payment_id}"><i class="fa-solid fa-hand-holding-dollar"></i></button></td>
+                        <td><button type="button" id="modal-make-payment" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-popup-window" data-test-id="${items.payment_id}" data-test-amount="${items.rate}"><i class="fa-solid fa-hand-holding-dollar"></i></button></td>
                     </tr>
                 </jstl:forEach>
             </tbody>

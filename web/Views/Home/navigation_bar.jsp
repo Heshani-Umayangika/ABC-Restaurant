@@ -80,6 +80,10 @@
             <i class="fa-solid fa-calendar-day"></i> 
             <span class="ms-4">Reservations</span> 
         </a>  
+         <a href="/ABC_Restaurant/MyPayments">
+            <i class="fa-solid fa-envelope"></i> 
+            <span class="ms-4">Bill</span> 
+        </a>
         <a href="/ABC_Restaurant/MyInquiries">
             <i class="fa-solid fa-envelope"></i> 
             <span class="ms-4">Inquiries</span> 

@@ -121,7 +121,7 @@
 //
 //
 //
-   // Reservation Section Start-------------------------------------------------------
+    // Reservation Section Start-------------------------------------------------------
     $(document).on('click', '#modal-add-reservations', function () {
         var title = "Confirm Registration", buttonText = "Save", buttonClass = "btn btn-primary", url = "Reservations?page=Add";
         openModal(title, buttonText, buttonClass, url);
@@ -145,8 +145,8 @@
         var actionURL = "Reservations", formMethod = "GET", actionType = "Delete";
         changeForm(actionURL, formMethod, actionType);
     });
-    
-        $(document).on('click', '#modal-info-reservations', function () {
+
+    $(document).on('click', '#modal-info-reservations', function () {
         var title = "Customer Information", buttonText = "Close", buttonClass = "hide-button", url = 'Reservations?page=Info&customerId=' + $(this).data('test-id');
         openModal(title, buttonText, buttonClass, url);
 //
@@ -159,7 +159,7 @@
     //   
     //    
     // Payments Section Start-------------------------------------------------------
-    
+
     $(document).on('click', '#modal-edit-payments', function () {
         var title = "Confirm Modification", buttonText = "Update", buttonClass = "btn btn-warning", url = 'Payments?page=Edit&paymentId=' + $(this).data('test-id');
         openModal(title, buttonText, buttonClass, url);
@@ -178,15 +178,15 @@
         var actionURL = "MyInquiries", formMethod = "POST", actionType = "Insert";
         changeForm(actionURL, formMethod, actionType);
     });
-    
-        $(document).on('click', '#modal-delete-myInquiries', function () {
+
+    $(document).on('click', '#modal-delete-myInquiries', function () {
         var title = "Deleting the record !", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'MyInquiries?page=Delete&inquiryId=' + $(this).data('test-id');
         openModal(title, buttonText, buttonClass, url);
 
         var actionURL = "MyInquiries", formMethod = "GET", actionType = "Delete";
         changeForm(actionURL, formMethod, actionType);
     });
-    
+
     $(document).on('click', '#modal-add-my-reservations', function () {
         var title = "Confirm Reservation", buttonText = "Save", buttonClass = "btn btn-primary", url = "MyReservations?page=Add";
         openModal(title, buttonText, buttonClass, url);
@@ -194,22 +194,25 @@
         var actionURL = "MyReservations", formMethod = "POST", actionType = "Insert";
         changeForm(actionURL, formMethod, actionType);
     });
-    
-        $(document).on('click', '#modal-delete-my-reservations', function () {
+
+    $(document).on('click', '#modal-delete-my-reservations', function () {
         var title = "Deleting the record !", buttonText = "Delete", buttonClass = "btn btn-danger", url = 'MyReservations?page=Delete&reservationId=' + $(this).data('test-id');
         openModal(title, buttonText, buttonClass, url);
 
         var actionURL = "MyReservations", formMethod = "GET", actionType = "Delete";
         changeForm(actionURL, formMethod, actionType);
     });
-// Customer Section End-------------------------------------------------------
 
-// Visitor Section Start--------------------------------------------------------
-    $(document).on('click', '#modal-download-visitor', function () {
-        var url = 'Visitor?page=Download&appointmentId=' + $(this).data('test-id');
-        window.open(url);
+    $(document).on('click', '#modal-make-payment', function () {
+        var amount = $(this).data('test-amount');
+        var paymentId = $(this).data('test-id');
+        var title = "Confirm Payment", buttonText = "Pay", buttonClass = "btn btn-success", url = 'MyPayments?page=Pay&amount=' + encodeURIComponent(amount) + '&paymentId=' + encodeURIComponent(paymentId);
+        openModal(title, buttonText, buttonClass, url);
+
+        var actionURL = "MyPayments", formMethod = "POST", actionType = "Insert";
+        changeForm(actionURL, formMethod, actionType);
     });
-// Visitor Section End----------------------------------------------------------
+// Customer Section End-------------------------------------------------------
 
 // Sign Out Section-------------------------------------------------------------
     $(document).on('click', '.logout-btn', function () {
